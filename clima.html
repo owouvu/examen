@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima</title>
+    <style>
+      /* Estilo para clima.html */
+/* Estilo para clima.html */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #89CFF0, #FFFFFF); /* Fondo tipo cielo claro */
+    color: #2C3E50;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el título */
+    color: #2E86C1;
+}
+
+input {
+    padding: 15px;
+    font-size: 1.2rem;
+    width: 80%;
+    max-width: 400px;
+    border: 2px solid #5DADE2;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+button {
+    background: linear-gradient(to right, #5DADE2, #117A65); /* Degradado en el botón */
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento */
+    background: linear-gradient(to right, #117A65, #5DADE2); /* Cambio de colores */
+}
+
+button:active {
+    transform: scale(1.05);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+button::before {
+    content: "🌦️"; /* Emoji que representa el clima */
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    width: 80%;
+    max-width: 500px;
+}
+
+.result p {
+    font-size: 1.2rem;
+    margin: 8px 0;
+    color: #2C3E50;
+}
+
+.result p strong {
+    color: #117A65;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #5D6D7E;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Consulta el Clima</h1>
+    <input type="text" id="ciudad" placeholder="Ingresa una ciudad">
+    <button onclick="consultarClima()">Obtener Clima</button>
+    <div class="result" id="resultado"></div>
+
+    <script>
+        async function consultarClima() {
+            const ciudad = document.getElementById('ciudad').value.trim();
+            const resultado = document.getElementById('resultado');
+
+            if (!ciudad) {
+                resultado.textContent = 'Por favor, ingresa una ciudad.';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/clima/${encodeURIComponent(ciudad)}`);
+                if (!response.ok) {
+                    throw new Error('No se pudieron obtener los datos.');
+                }
+                const data = await response.json();
+
+                resultado.innerHTML = `
+                    <p><strong>Ciudad:</strong> ${data.ciudad}</p>
+                    <p><strong>Temperatura:</strong> ${data.temperatura}°C</p>
+                    <p><strong>Descripción:</strong> ${data.descripcion}</p>
+                    <p><strong>Humedad:</strong> ${data.humedad}%</p>
+                `;
+            } catch (error) {
+                resultado.textContent = 'Hubo un error al obtener el clima.';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+</head>
+<style>
+/* Estilo para home.html */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #4facfe, #00f2fe); /* Fondo degradado tipo cielo */
+    color: #ffffff;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el título */
+}
+
+h1::before {
+    content: "☀️ ";
+}
+
+h1::after {
+    content: " ☁️";
+}
+
+p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #ecf0f1;
+}
+
+button {
+    background: linear-gradient(to right, #36d1dc, #5b86e5); /* Degradado en el botón */
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px; /* Bordes redondeados */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento */
+    background: linear-gradient(to right, #5b86e5, #36d1dc); /* Inversión de degradado al pasar el mouse */
+}
+
+button:active {
+    transform: scale(1.05); /* Efecto de clic */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+button::before {
+    content: "🌈";
+}
+
+button::after {
+    content: " 🌍";
+}
+
+</style>
+<body>
+    <h1>Bienvenido a la API del Clima</h1>
+    <p>Haz clic en el botón para buscar el clima de cualquier ciudad.</p>
+    <button onclick="window.location.href='clima.html'">Ir al buscador</button>
+</body>
+</html>
